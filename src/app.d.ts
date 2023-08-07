@@ -1,7 +1,9 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			locale: string | undefined
+		}
 		// interface PageData {}
 		// interface Platform {}
 	}
