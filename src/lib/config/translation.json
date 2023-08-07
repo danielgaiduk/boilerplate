@@ -1,0 +1,4 @@
+{
+	"LOCALES": ["en", "de"],
+	"LOADERS": ["app"]
+}
