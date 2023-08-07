@@ -10,4 +10,6 @@ Sentry.init({
 	integrations: [new Sentry.Replay()]
 })
 
-export const handleError = Sentry.handleErrorWithSentry()
+const handleError = Sentry.handleErrorWithSentry()
+
+export { handleError }

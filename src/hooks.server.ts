@@ -9,7 +9,10 @@ Sentry.init({
 	tracesSampleRate: 1
 })
 
-export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
+const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
 	return await resolve(event)
 }) satisfies Handle)
-export const handleError = Sentry.handleErrorWithSentry()
+
+const handleError = Sentry.handleErrorWithSentry()
+
+export { handle, handleError }
