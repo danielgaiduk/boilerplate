@@ -1,6 +1,6 @@
-import { toKebabCase } from '$lib/utils'
 import { DEFAULT_LOCALE, APP_NAME } from '$lib/config/app.json'
 import { LOCALES } from '$lib/config/translation.json'
+import { toKebabCase } from '$lib/utils'
 
 function parseAcceptLanguage(headerLanguage: string | null): string | null {
 	if (!headerLanguage) {
@@ -39,7 +39,9 @@ function isLocaleAvailable(locale: string | undefined): boolean {
 
 function getLocaleFromRequest(cookie: Record<string, string>, request: Request): string {
 	const formattedAppName = toKebabCase(APP_NAME)
-	const locale = cookie?.[formattedAppName] ?? getPreferredLocale(request)
+	const cookieLocale = cookie?.[`${formattedAppName}_locale`]
+	const preferredLocale = getPreferredLocale(request)
+	const locale = cookieLocale ?? preferredLocale
 
 	if (locale && isLocaleAvailable(locale)) {
 		return locale
@@ -65,4 +67,24 @@ function buildLocalizedUrl(cookie: Record<string, string>, request: Request, url
 	return location
 }
 
-export { isLocaleAvailable, buildLocalizedUrl }
+function getPathnameFragments(pathname: string): string[] {
+	return pathname?.split('/')?.filter(Boolean) ?? []
+}
+
+function extractLocaleFromPathname(pathname: string): string {
+	const [, ...rest] = getPathnameFragments(pathname)
+
+	return rest?.join('/') ?? ''
+}
+
+function getAllLocalePaths(locale: string, url: URL): IUrlCollection[] {
+	const { origin = '', pathname = '', search = '' } = url
+	const path = extractLocaleFromPathname(pathname)
+
+	return LOCALES.map((currentLocale) => ({
+		href: `${origin}/${path}${search}`,
+		hreflang: currentLocale === DEFAULT_LOCALE ? 'x-default' : locale
+	}))
+}
+
+export { getAllLocalePaths, isLocaleAvailable, buildLocalizedUrl }
