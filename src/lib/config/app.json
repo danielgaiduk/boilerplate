@@ -1,4 +1,6 @@
 {
 	"APP_NAME": "Boilerplate",
-	"DEFAULT_LOCALE": "de"
+	"DEFAULT_LOCALE": "de",
+	"DEFAULT_TITLE": "app.title",
+	"DEFAULT_DESCRIPTION": "app.description"
 }
