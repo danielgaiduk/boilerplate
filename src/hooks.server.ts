@@ -1,4 +1,5 @@
 import {
+	buildCookie,
 	buildLocalizedUrl,
 	isLocaleAvailable,
 	log,
@@ -47,6 +48,8 @@ const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
 			'%lang%': `lang="${locale}"`
 		})
 	)
+
+	response.headers.append('set-cookie', buildCookie('locale', locale as string))
 
 	return response
 }) satisfies Handle)
