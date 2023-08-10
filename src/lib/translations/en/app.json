@@ -1,3 +1,5 @@
 {
-	"secret": "Secret Jodel"
+	"name": "Boilerplate",
+	"title": "Boilerplate",
+	"description": "Boilerplate for a web app"
 }

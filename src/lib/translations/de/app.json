@@ -1,3 +1,5 @@
 {
-	"app_name": "Boilerplate"
+	"name": "Boilerplate",
+	"title": "Boilerplate",
+	"description": "Boilerplate for a web app"
 }
