@@ -2,11 +2,11 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			locale: string | undefined
+			locale?: string
 		}
 		interface PageData {
-			locale: string | undefined
-			seo: ISeoTemplate
+			locale?: string
+			seo?: ISeoTemplate
 		}
 		// interface Platform {}
 	}
