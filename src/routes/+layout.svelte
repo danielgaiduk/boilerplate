@@ -29,11 +29,6 @@
 	{/each}
 </svelte:head>
 
-<MetaTags
-	{title}
-	canonical={url.href}
-	description={seo.description}
-	titleTemplate={`${seo.title} | %s`}
-/>
+<MetaTags title={`${seo.title} | ${title}`} canonical={url.href} description={seo.description} />
 
 <slot />
