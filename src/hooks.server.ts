@@ -9,6 +9,7 @@ import {
 } from '$lib/utils'
 import { PUBLIC_SENTRY_DSN } from '$env/static/public'
 import { sequence } from '@sveltejs/kit/hooks'
+import { setupPocketbase } from '$lib/server'
 import * as Sentry from '@sentry/sveltekit'
 import type { Handle } from '@sveltejs/kit'
 
@@ -40,7 +41,21 @@ const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
 		return redirect(location)
 	}
 
+	const pb = await setupPocketbase(cookie)
+
+	if (pb.authStore.isValid) {
+		if (id?.includes('(unguarded)')) {
+			return redirect(`/${locale}/`)
+		}
+	} else {
+		if (id?.includes('(guarded)')) {
+			return redirect(`/${locale}/login?redirect=${encodeURI(url.pathname)}`)
+		}
+	}
+
 	locals.locale = locale
+	locals.pb = pb
+	locals.user = structuredClone(pb.authStore.model)
 
 	const response = await resolve(
 		event,
