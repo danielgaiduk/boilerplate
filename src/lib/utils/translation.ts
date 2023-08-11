@@ -1,7 +1,6 @@
-import { DEFAULT_LOCALE, APP_NAME } from '$lib/config/app.json'
+import { DEFAULT_LOCALE } from '$lib/config/app.json'
 import { LOCALES } from '$lib/config/translation.json'
-import { toKebabCase } from '$lib/utils'
-import type { IAlternateLinks } from '$lib/models'
+import { LOCALE_COOKIE_NAME } from '$lib/constants'
 
 function parseAcceptLanguage(headerLanguage: string | null): string | null {
 	if (!headerLanguage) {
@@ -39,10 +38,7 @@ function isLocaleAvailable(locale: string | undefined): boolean {
 }
 
 function getLocaleFromRequest(cookie: Record<string, string>, request: Request): string {
-	const formattedAppName = toKebabCase(APP_NAME)
-	const cookieLocale = cookie?.[`${formattedAppName}_locale`]
-	const preferredLocale = getPreferredLocale(request)
-	const locale = cookieLocale ?? preferredLocale
+	const locale = cookie?.[LOCALE_COOKIE_NAME] ?? getPreferredLocale(request)
 
 	if (locale && isLocaleAvailable(locale)) {
 		return locale
