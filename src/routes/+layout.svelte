@@ -5,7 +5,6 @@
 	import { MetaTags } from 'svelte-meta-tags'
 	import { page } from '$app/stores'
 	import { t } from '$lib/translations'
-	import type { IAlternateLinks, ISeo } from '$lib/models'
 
 	let title = ''
 	let description = ''
