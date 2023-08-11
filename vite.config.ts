@@ -18,8 +18,8 @@ const config: UserConfigExport = defineConfig({
 	},
 	server: {
 		https: {
-			key: fs.readFileSync(`${__dirname}/../cert/key.pem`),
-			cert: fs.readFileSync(`${__dirname}/../cert/cert.pem`)
+			key: fs.readFileSync(`${__dirname}/../../cert/key.pem`),
+			cert: fs.readFileSync(`${__dirname}/../../cert/cert.pem`)
 		},
 		proxy: {}
 	}
