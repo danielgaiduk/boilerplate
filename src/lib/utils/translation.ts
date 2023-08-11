@@ -77,7 +77,7 @@ function extractLocaleFromPathname(pathname: string): string {
 	return rest?.join('/') ?? ''
 }
 
-function getAllLocalePaths(locale: string, url: URL): IUrlCollection[] {
+function getAllLocalizedPaths(locale: string, url: URL): IAlternateLinks[] {
 	const { origin = '', pathname = '', search = '' } = url
 	const path = extractLocaleFromPathname(pathname)
 
@@ -87,4 +87,4 @@ function getAllLocalePaths(locale: string, url: URL): IUrlCollection[] {
 	}))
 }
 
-export { getAllLocalePaths, isLocaleAvailable, buildLocalizedUrl }
+export { getAllLocalizedPaths, isLocaleAvailable, buildLocalizedUrl }
