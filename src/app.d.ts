@@ -4,7 +4,10 @@ declare global {
 		interface Locals {
 			locale: string | undefined
 		}
-		// interface PageData {}
+		interface PageData {
+			locale: string | undefined
+			seo: ISeoTemplate
+		}
 		// interface Platform {}
 	}
 }
