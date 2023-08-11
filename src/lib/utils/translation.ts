@@ -1,6 +1,7 @@
 import { DEFAULT_LOCALE, APP_NAME } from '$lib/config/app.json'
 import { LOCALES } from '$lib/config/translation.json'
 import { toKebabCase } from '$lib/utils'
+import type { IAlternateLinks } from '$lib/models'
 
 function parseAcceptLanguage(headerLanguage: string | null): string | null {
 	if (!headerLanguage) {
