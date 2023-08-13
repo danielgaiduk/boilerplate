@@ -1,6 +1,4 @@
-import { DEFAULT_LOCALE } from '$lib/config/app.json'
-import { LOCALES } from '$lib/config/translation.json'
-import { LOCALE_COOKIE_NAME } from '$lib/constants'
+import { CONFIG, LOCALE_COOKIE_NAME } from '$lib/constants'
 
 function parseAcceptLanguage(headerLanguage: string | null): string | null {
 	if (!headerLanguage) {
@@ -28,13 +26,13 @@ function getPreferredLocale(request: Request): string {
 	const preferredLocale = parseAcceptLanguage(acceptLanguage)
 	const isPrefferedLocaleAvailable = !!preferredLocale && isLocaleAvailable(preferredLocale)
 
-	return isPrefferedLocaleAvailable ? preferredLocale : DEFAULT_LOCALE
+	return isPrefferedLocaleAvailable ? preferredLocale : CONFIG.DEFAULT_LOCALE
 }
 
 function isLocaleAvailable(locale: string | undefined): boolean {
 	if (!locale) return false
 
-	return LOCALES?.includes(locale?.toLowerCase())
+	return CONFIG.LOCALES?.includes(locale?.toLowerCase())
 }
 
 function getLocaleFromRequest(cookie: Record<string, string>, request: Request): string {
@@ -44,7 +42,7 @@ function getLocaleFromRequest(cookie: Record<string, string>, request: Request):
 		return locale
 	}
 
-	return DEFAULT_LOCALE
+	return CONFIG.DEFAULT_LOCALE
 }
 
 function buildLocalizedUrl(cookie: Record<string, string>, request: Request, url: URL) {
@@ -78,9 +76,9 @@ function getAllLocalizedPaths(locale: string, url: URL): IAlternateLinks[] {
 	const { origin = '', pathname = '', search = '' } = url
 	const path = extractLocaleFromPathname(pathname)
 
-	return LOCALES.map((currentLocale) => ({
+	return CONFIG.LOCALES.map((currentLocale) => ({
 		href: `${origin}/${path}${search}`,
-		hreflang: currentLocale === DEFAULT_LOCALE ? 'x-default' : locale
+		hreflang: currentLocale === CONFIG.DEFAULT_LOCALE ? 'x-default' : locale
 	}))
 }
 

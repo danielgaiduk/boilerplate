@@ -1,12 +1,11 @@
 import i18n from 'sveltekit-i18n'
-import { LOCALES, LOADERS } from '$lib/config/translation.json'
-import { DEFAULT_LOCALE } from '$lib/config/app.json'
+import { CONFIG } from '$lib/constants'
 import type { Config } from 'sveltekit-i18n'
 
 const loaders = []
 
-for (const locale of LOCALES) {
-	for (const loader of LOADERS) {
+for (const locale of CONFIG.LOCALES) {
+	for (const loader of CONFIG.LOADERS) {
 		loaders.push({
 			locale,
 			key: loader,
@@ -16,7 +15,7 @@ for (const locale of LOCALES) {
 }
 
 const config: Config = {
-	fallbackLocale: DEFAULT_LOCALE,
+	fallbackLocale: CONFIG.DEFAULT_LOCALE,
 	loaders
 }
 
