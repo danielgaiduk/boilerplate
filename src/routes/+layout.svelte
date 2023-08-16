@@ -8,17 +8,14 @@
 
 	let title = ''
 	let description = ''
+	let canonical = ''
 	let paths: IAlternateLinks[] = []
-	let seo: ISeo = {}
 
-	$: ({ data, url } = $page)
-
-	$: if (data?.locale) {
-		title = $t(CONFIG.DEFAULT_TITLE)
-		description = $t(CONFIG.DEFAULT_DESCRIPTION)
-		seo.title = data.seo?.title ? $t(data.seo?.title) : title
-		seo.description = data.seo?.description ? $t(data.seo?.description) : description
-		paths = getAllLocalizedPaths(data?.locale, url)
+	$: if ($page?.data?.locale) {
+		title = $t($page?.data?.title || CONFIG.APP_NAME)
+		description = $t($page?.data?.description || CONFIG.DEFAULT_DESCRIPTION)
+		canonical = $page?.url?.href
+		paths = getAllLocalizedPaths($page?.data?.locale, $page?.url)
 	}
 </script>
 
@@ -28,6 +25,6 @@
 	{/each}
 </svelte:head>
 
-<MetaTags title={`${seo.title} | ${title}`} canonical={url.href} description={seo.description} />
+<MetaTags {description} {title} {canonical} titleTemplate={`%s | ${CONFIG.APP_NAME}`} />
 
 <slot />

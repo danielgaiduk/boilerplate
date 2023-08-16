@@ -10,7 +10,8 @@ declare global {
 		}
 		interface PageData {
 			locale?: string
-			seo?: ISeoTemplate
+			title?: string
+			description?: string
 		}
 		// interface Platform {}
 	}
