@@ -8,14 +8,12 @@
 
 	let title = ''
 	let description = ''
-	let canonical = ''
 	let paths: IAlternateLinks[] = []
 
-	$: if ($page?.data?.locale) {
-		title = $t($page?.data?.title || CONFIG.APP_NAME)
+	$: if ($page?.data) {
 		description = $t($page?.data?.description || CONFIG.DEFAULT_DESCRIPTION)
-		canonical = $page?.url?.href
 		paths = getAllLocalizedPaths($page?.data?.locale, $page?.url)
+		title = $t($page?.data?.title || CONFIG.APP_NAME)
 	}
 </script>
 
@@ -25,6 +23,11 @@
 	{/each}
 </svelte:head>
 
-<MetaTags {description} {title} {canonical} titleTemplate={`%s | ${CONFIG.APP_NAME}`} />
+<MetaTags
+	{description}
+	{title}
+	canonical={$page?.url?.href}
+	titleTemplate={`%s | ${CONFIG.APP_NAME}`}
+/>
 
 <slot />
