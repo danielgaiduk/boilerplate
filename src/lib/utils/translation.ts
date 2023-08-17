@@ -72,12 +72,17 @@ function extractLocaleFromPathname(pathname: string): string {
 	return rest?.join('/') ?? ''
 }
 
-function getAllLocalizedPaths(locale: string, url: URL): IAlternateLinks[] {
+function getAllLocalizedPaths(locale: string | undefined, url: URL): IAlternateLinks[] {
+	if (!locale) {
+		return []
+	}
+
 	const { origin = '', pathname = '', search = '' } = url
+
 	const path = extractLocaleFromPathname(pathname)
 
 	return CONFIG.LOCALES.map((currentLocale) => ({
-		href: `${origin}/${path}${search}`,
+		href: `${origin}/${currentLocale}/${path}${search}`,
 		hreflang: currentLocale === CONFIG.DEFAULT_LOCALE ? 'x-default' : locale
 	}))
 }
