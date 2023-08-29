@@ -1,9 +1,10 @@
+import { defineConfig } from 'vitest/config'
 import { sentrySvelteKit } from '@sentry/sveltekit'
-import fs from 'fs'
 import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig, type UserConfigExport } from 'vitest/config'
+import fs from 'fs'
 
-const config: UserConfigExport = defineConfig({
+/** @type {import('vitest/config').UserConfigExport} */
+export default defineConfig({
 	plugins: [
 		sentrySvelteKit({
 			sourceMapsUploadOptions: {
@@ -24,5 +25,3 @@ const config: UserConfigExport = defineConfig({
 		proxy: {}
 	}
 })
-
-export default config
