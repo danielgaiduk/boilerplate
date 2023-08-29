@@ -4,12 +4,10 @@ import forms from '@tailwindcss/forms'
 import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
-const config = {
+export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {}
 	},
 	plugins: [aspectRatio, containerQueries, forms, typography]
 }
-
-export default config
