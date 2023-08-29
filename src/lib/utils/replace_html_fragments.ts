@@ -1,11 +1,4 @@
-function redirect(location: string) {
-	return new Response(null, {
-		status: 302,
-		headers: { location }
-	})
-}
-
-function replaceHTMLFragments(options: Record<string, string>): {
+export default function (options: Record<string, string>): {
 	transformPageChunk: ({ html }: { html: string }) => string
 } {
 	return {
@@ -18,5 +11,3 @@ function replaceHTMLFragments(options: Record<string, string>): {
 		}
 	}
 }
-
-export { redirect, replaceHTMLFragments }

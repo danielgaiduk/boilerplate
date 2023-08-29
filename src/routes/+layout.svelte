@@ -1,18 +1,18 @@
 <script lang="ts">
 	import '../app.css'
 	import { CONFIG } from '$lib/constants'
-	import { getAllLocalizedPaths } from '$lib/utils'
 	import { MetaTags } from 'svelte-meta-tags'
 	import { page } from '$app/stores'
 	import { t } from '$lib/translations'
+	import get_all_localized_paths from '$lib/utils/get_all_localized_paths'
 
 	let title = ''
 	let description = ''
-	let paths: IAlternateLinks[] = []
+	let paths: AlternateLinks[] = []
 
 	$: if ($page?.data) {
 		description = $t($page?.data?.description || CONFIG.DEFAULT_DESCRIPTION)
-		paths = getAllLocalizedPaths($page?.data?.locale, $page?.url)
+		paths = get_all_localized_paths($page?.data?.locale, $page?.url)
 		title = $t($page?.data?.title || CONFIG.APP_NAME)
 	}
 </script>
