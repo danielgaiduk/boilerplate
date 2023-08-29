@@ -1,7 +1,7 @@
-import adapter from '@sveltejs/adapter-node'
-import { vitePreprocess } from '@sveltejs/kit/vite'
-import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
+import { readFileSync } from 'fs'
+import { vitePreprocess } from '@sveltejs/kit/vite'
+import adapter from '@sveltejs/adapter-node'
 
 const url = new URL('package.json', import.meta.url)
 const file = fileURLToPath(url)
