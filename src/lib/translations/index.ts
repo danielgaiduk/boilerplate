@@ -1,5 +1,5 @@
-import i18n from 'sveltekit-i18n'
 import { CONFIG } from '$lib/constants'
+import i18n from 'sveltekit-i18n'
 import type { Config } from 'sveltekit-i18n'
 
 const loaders = []
