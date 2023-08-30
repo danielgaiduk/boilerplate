@@ -15,6 +15,10 @@ declare global {
 		}
 		// interface Platform {}
 	}
+	type LanguageCollection = {
+		language: string
+		rating: number
+	}
 	type Temporal = [number, 'day' | 'month' | 'year']
 	type Cookie = Record<string, string>
 	type AlternateLinks = {

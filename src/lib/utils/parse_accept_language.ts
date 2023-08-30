@@ -1,14 +1,14 @@
-export default function (headerLanguage: string): string {
-	const filteredLanguages: { language: string; rating: number }[] = []
+export default function (header_languages: string): string {
+	const filtered_languages: LanguageCollection[] = []
 
-	for (const acceptedLanguage of headerLanguage?.split(',') || []) {
-		const [fullLanguage, rating = '1'] = acceptedLanguage.split(';q=')
-		const [language] = fullLanguage.split('-')
+	for (const header_language of header_languages?.split(',') || []) {
+		const [full_language, rating = '1'] = header_language.split(';q=')
+		const [language] = full_language.split('-')
 
 		if (language && rating) {
-			filteredLanguages.push({ language, rating: parseFloat(rating) })
+			filtered_languages.push({ language, rating: parseFloat(rating) })
 		}
 	}
 
-	return filteredLanguages?.sort((a, b) => b?.rating - a?.rating)?.[0]?.language
+	return filtered_languages?.sort((a, b) => b?.rating - a?.rating)?.[0]?.language
 }
