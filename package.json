@@ -49,6 +49,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sentry/sveltekit": "^7.65.0"
+		"@sentry/sveltekit": "^7.66.0"
 	}
 }
