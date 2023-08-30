@@ -1,14 +1,20 @@
 export default function (header_languages: string): string {
-	const filtered_languages: LanguageCollection[] = []
+	let selected_language: SelectedLanguage = { language: '', rating: 0 }
 
 	for (const header_language of header_languages?.split(',') || []) {
-		const [full_language, rating = '1'] = header_language.split(';q=')
+		const [full_language, source_rating = '1'] = header_language.split(';q=')
 		const [language] = full_language.split('-')
 
-		if (language && rating) {
-			filtered_languages.push({ language, rating: parseFloat(rating) })
+		if (language && source_rating) {
+			const rating = parseFloat(source_rating)
+
+			if (rating > selected_language.rating) {
+				selected_language = { language, rating }
+			}
 		}
 	}
 
-	return filtered_languages?.sort((a, b) => b?.rating - a?.rating)?.[0]?.language
+	console.log(selected_language)
+
+	return selected_language?.language
 }
