@@ -15,7 +15,7 @@ declare global {
 		}
 		// interface Platform {}
 	}
-	type LanguageCollection = {
+	type SelectedLanguage = {
 		language: string
 		rating: number
 	}
