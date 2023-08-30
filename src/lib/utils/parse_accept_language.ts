@@ -14,7 +14,5 @@ export default function (header_languages: string): string {
 		}
 	}
 
-	console.log(selected_language)
-
 	return selected_language?.language
 }
