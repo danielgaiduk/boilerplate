@@ -1,8 +1,7 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-
 const PORT = 4173
 
-const config: PlaywrightTestConfig = {
+/** @type {import('@playwright/test').PlaywrightTestConfig} */
+export default {
 	webServer: {
 		command: 'pnpm build && pnpm preview',
 		port: PORT
@@ -13,5 +12,3 @@ const config: PlaywrightTestConfig = {
 	testDir: 'tests',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/
 }
-
-export default config
