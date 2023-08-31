@@ -8,6 +8,6 @@ export default function (locale: string, url: URL): AlternateLinks[] {
 
 	return CONFIG.LOCALES.map((currentLocale) => ({
 		href: `${origin}/${currentLocale}/${path}${search}`,
-		hreflang: currentLocale === CONFIG.DEFAULT_LOCALE ? 'x-default' : locale
+		hreflang: currentLocale === CONFIG.DEFAULT_LOCALE ? 'x-default' : currentLocale
 	}))
 }
