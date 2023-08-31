@@ -6,12 +6,10 @@
 import { build, files, version } from '$service-worker'
 
 const CACHE = `cache-${version}`
-
 const ASSETS = [...build, ...files]
+const SW = self as unknown as ServiceWorkerGlobalScope
 
-const sw = self as unknown as ServiceWorkerGlobalScope
-
-sw.addEventListener('install', (event) => {
+SW.addEventListener('install', (event) => {
 	async function addFilesToCache() {
 		const cache = await caches.open(CACHE)
 		await cache.addAll(ASSETS)
@@ -20,7 +18,7 @@ sw.addEventListener('install', (event) => {
 	event.waitUntil(addFilesToCache())
 })
 
-sw.addEventListener('activate', (event) => {
+SW.addEventListener('activate', (event) => {
 	async function deleteOldCaches() {
 		for (const key of await caches.keys()) {
 			if (key !== CACHE) await caches.delete(key)
@@ -30,7 +28,7 @@ sw.addEventListener('activate', (event) => {
 	event.waitUntil(deleteOldCaches())
 })
 
-sw.addEventListener('fetch', (event) => {
+SW.addEventListener('fetch', (event) => {
 	if (event.request.method !== 'GET') return
 
 	async function respond(): Promise<Response> {
@@ -38,19 +36,19 @@ sw.addEventListener('fetch', (event) => {
 		const cache = await caches.open(CACHE)
 
 		if (ASSETS.includes(url.pathname)) {
-			return cache.match(url.pathname) as Promise<Response>
+			return (await cache.match(url.pathname)) as Response
 		}
 
 		try {
 			const response = await fetch(event.request)
 
 			if (response.status === 200) {
-				cache.put(event.request, response.clone())
+				await cache.put(event.request, response.clone())
 			}
 
 			return response
 		} catch {
-			return cache.match(event.request) as Promise<Response>
+			return (await cache.match(event.request)) as Response
 		}
 	}
 
