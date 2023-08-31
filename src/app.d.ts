@@ -15,16 +15,10 @@ declare global {
 		}
 		// interface Platform {}
 	}
-	type SelectedLanguage = {
-		language: string
-		rating: number
-	}
-	type Temporal = [number, 'day' | 'month' | 'year']
+	type AlternateLinks = { href: string; hreflang: string }
 	type Cookie = Record<string, string>
-	type AlternateLinks = {
-		href: string
-		hreflang: string
-	}
+	type SelectedLanguage = { language: string; rating: number }
+	type Temporal = [number, 'day' | 'month' | 'year']
 }
 
 export {}
