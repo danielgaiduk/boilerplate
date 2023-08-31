@@ -1,3 +1,4 @@
+import { CONFIG } from '$lib/constants'
 import { PUBLIC_SENTRY_DSN } from '$env/static/public'
 import { sequence } from '@sveltejs/kit/hooks'
 import * as Sentry from '@sentry/sveltekit'
@@ -56,7 +57,8 @@ export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }
 	const response = await resolve(
 		event,
 		replace_html_fragments({
-			'%lang%': `lang="${locale}"`
+			'%lang%': locale,
+			'%theme-color%': CONFIG.THEME_COLOR
 		})
 	)
 
