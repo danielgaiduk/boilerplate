@@ -16,15 +16,15 @@ Sentry.init({
 	tracesSampleRate: 1
 })
 
-const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
+export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
 	log('SERVER HOOK CALLED')
 
 	const { params, request, route, url } = event
 	const { locale = '' } = params
 	const { id } = route
 
-	if (id && !id?.includes('(localized)')) {
-		return await resolve(event)
+	if (!id || (id && !id?.includes('(localized)'))) {
+		return resolve(event)
 	}
 
 	const cookie = parse_cookie(request)
@@ -65,6 +65,4 @@ const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
 	return response
 }) satisfies Handle)
 
-const handleError = Sentry.handleErrorWithSentry()
-
-export { handle, handleError }
+export const handleError = Sentry.handleErrorWithSentry()
