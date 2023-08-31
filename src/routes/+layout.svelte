@@ -8,6 +8,7 @@
 
 	let title = ''
 	let description = ''
+	/* global AlternateLinks */
 	let paths: AlternateLinks[] = []
 
 	$: if ($page?.data) {
