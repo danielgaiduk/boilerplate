@@ -9,9 +9,9 @@ declare global {
 			user: Pocketbase.authStore.model
 		}
 		interface PageData {
+			description: string
 			locale: string
-			title?: string
-			description?: string
+			title: string
 		}
 		// interface Platform {}
 	}
