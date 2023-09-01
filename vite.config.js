@@ -8,8 +8,8 @@ export default defineConfig({
 	plugins: [
 		sentrySvelteKit({
 			sourceMapsUploadOptions: {
-				org: 'daniel-gaiduk',
-				project: 'boilerplate'
+				org: '', // Fill out sentry org
+				project: '' // Fill out sentry project
 			}
 		}),
 		sveltekit()
