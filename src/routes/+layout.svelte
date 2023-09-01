@@ -5,22 +5,18 @@
 	import { t } from '$lib/translations'
 	import get_all_localized_paths from '$lib/utils/get_all_localized_paths'
 
-	let title = $t(CONFIG.APP_NAME)
-	let description = $t(CONFIG.DEFAULT_DESCRIPTION)
-	/* global AlternateLinks */
-	let paths: AlternateLinks[] = []
-
-	$: if ($page?.data) {
-		title = $t($page?.data?.title || CONFIG.APP_NAME)
-		description = $t($page?.data?.description || CONFIG.DEFAULT_DESCRIPTION)
-		paths = get_all_localized_paths($page?.data?.locale, $page?.url)
-	}
+	$: canonical = $page?.url?.href
+	$: description = $t($page?.data?.description)
+	$: paths = get_all_localized_paths($page?.data?.locale, $page?.url)
+	$: title = $t($page?.data?.title)
+	$: title_partial = $t(CONFIG.TITLE_PARTIAL)
+	$: title_template = `${title} | ${title_partial}`
 </script>
 
 <svelte:head>
-	<title>{title} | {CONFIG.APP_NAME}</title>
+	<title>{title_template}</title>
 	<meta name="description" content={description} />
-	<link rel="canonical" href={$page?.url?.href} />
+	<link rel="canonical" href={canonical} />
 	{#each paths as { href, hreflang }}
 		<link rel="alternate" {hreflang} {href} />
 	{/each}
