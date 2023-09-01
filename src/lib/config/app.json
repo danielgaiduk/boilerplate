@@ -1,7 +1,6 @@
 {
 	"APP_NAME": "Boilerplate",
-	"THEME_COLOR": "#000000",
 	"DEFAULT_LOCALE": "de",
-	"DEFAULT_TITLE": "app.title",
-	"DEFAULT_DESCRIPTION": "app.description"
+	"THEME_COLOR": "#000000",
+	"TITLE_PARTIAL": "app.title"
 }
