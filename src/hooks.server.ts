@@ -5,6 +5,7 @@ import * as Sentry from '@sentry/sveltekit'
 import {
 	buildCookie,
 	buildLocalizedUrl,
+	getLocaleFromRequest,
 	isLocaleAvailable,
 	log,
 	parseCookie,
@@ -26,11 +27,17 @@ export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }
 	const { locale = '' } = params
 	const { id } = route
 
-	if (!id || (id && !id?.includes('(localized)'))) {
+	if (id && !id?.includes('(localized)')) {
 		return resolve(event)
 	}
 
 	const cookie = parseCookie(request)
+
+	if (!id) {
+		const locale = getLocaleFromRequest(cookie, request)
+
+		return redirect(`/${locale}/404${url.pathname}`)
+	}
 
 	if (!isLocaleAvailable(locale)) {
 		const location = buildLocalizedUrl(cookie, request, url)
