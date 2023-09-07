@@ -1,4 +1,0 @@
-{
-	"LOCALES": ["en", "de"],
-	"LOADERS": ["app", "error"]
-}
