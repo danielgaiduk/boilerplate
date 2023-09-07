@@ -2,11 +2,11 @@
 	import '../app.css'
 	import { page } from '$app/stores'
 	import { t } from '$lib/translations'
-	import get_all_localized_paths from '$lib/utils/get_all_localized_paths'
+	import { getAllLocalizedPaths } from '$lib/utils'
 
 	$: canonical = $page?.url?.href
 	$: description = $t($page?.data?.description)
-	$: paths = get_all_localized_paths($page?.data?.locale, $page?.url)
+	$: paths = getAllLocalizedPaths($page?.url)
 	$: title = $t($page?.data?.title)
 	$: title_partial = $t('app.title_partial')
 	$: title_template = `${title} | ${title_partial}`

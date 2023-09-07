@@ -1,15 +1,17 @@
-import { CONFIG } from '$lib/constants'
+import { THEME_COLOR } from '$lib/constants'
 import { PUBLIC_SENTRY_DSN } from '$env/static/public'
 import { sequence } from '@sveltejs/kit/hooks'
 import * as Sentry from '@sentry/sveltekit'
-import build_cookie from '$lib/utils/build_cookie'
-import build_localized_url from '$lib/utils/build_localized_url'
-import is_locale_available from '$lib/utils/is_locale_available'
-import log from '$lib/utils/log'
-import parse_cookie from '$lib/utils/parse_cookie'
-import redirect from '$lib/utils/redirect'
-import replace_html_fragments from '$lib/utils/replace_html_fragments'
-import setup_pocketbase from '$lib/server/setup_pocketbase'
+import {
+	buildCookie,
+	buildLocalizedUrl,
+	isLocaleAvailable,
+	log,
+	parseCookie,
+	redirect,
+	replaceHtmlFragments
+} from '$lib/utils'
+import { setupPocketbase } from '$lib/server/'
 import type { Handle } from '@sveltejs/kit'
 
 Sentry.init({
@@ -28,15 +30,15 @@ export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }
 		return resolve(event)
 	}
 
-	const cookie = parse_cookie(request)
+	const cookie = parseCookie(request)
 
-	if (!is_locale_available(locale)) {
-		const location = build_localized_url(cookie, request, url)
+	if (!isLocaleAvailable(locale)) {
+		const location = buildLocalizedUrl(cookie, request, url)
 
 		if (location) return redirect(location)
 	}
 
-	const pb = await setup_pocketbase(cookie)
+	const pb = await setupPocketbase(cookie)
 
 	if (pb.authStore.isValid) {
 		if (id?.includes('(unguarded)')) {
@@ -56,13 +58,13 @@ export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }
 
 	const response = await resolve(
 		event,
-		replace_html_fragments({
+		replaceHtmlFragments({
 			'%lang%': locale,
-			'%theme-color%': CONFIG.THEME_COLOR
+			'%theme-color%': THEME_COLOR
 		})
 	)
 
-	response.headers.append('set-cookie', build_cookie('locale', locale))
+	response.headers.append('set-cookie', buildCookie('locale', locale))
 
 	return response
 }) satisfies Handle)

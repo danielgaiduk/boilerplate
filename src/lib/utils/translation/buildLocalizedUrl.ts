@@ -1,7 +1,7 @@
-import get_locale_from_request from '$lib/utils/get_locale_from_request'
+import { getLocaleFromRequest } from '$lib/utils'
 
 export default function (cookie: Cookie, request: Request, url: URL): string {
-	const locale = get_locale_from_request(cookie, request)
+	const locale = getLocaleFromRequest(cookie, request)
 	const [fragment, ...rest] = url?.pathname?.split('/')?.filter(Boolean) ?? []
 
 	let location = `/${locale}`
