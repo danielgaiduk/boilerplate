@@ -36,7 +36,7 @@ export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }
 	if (!id) {
 		const locale = getLocaleFromRequest(cookie, request)
 
-		return redirect(`/${locale}/404${url.pathname}`)
+		return redirect(`/${locale}/404`)
 	}
 
 	if (!isLocaleAvailable(locale)) {
