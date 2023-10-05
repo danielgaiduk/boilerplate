@@ -1,18 +1,18 @@
-export default function (header_languages: string): string {
-	let selected_language: SelectedLanguage = { language: '', rating: 0 }
+export default function (headerLanguages: string): string {
+	let selectedLanguage: SelectedLanguage = { language: '', rating: 0 }
 
-	for (const header_language of header_languages?.split(',') || []) {
-		const [full_language, source_rating = '1'] = header_language.split(';q=')
-		const [language] = full_language.split('-')
+	for (const headerLanguage of headerLanguages?.split(',') || []) {
+		const [fullLanguage, sourceRating = '1'] = headerLanguage.split(';q=')
+		const [language] = fullLanguage.split('-')
 
-		if (language && source_rating) {
-			const rating = parseFloat(source_rating)
+		if (language && sourceRating) {
+			const rating = parseFloat(sourceRating)
 
-			if (rating > selected_language.rating) {
-				selected_language = { language, rating }
+			if (rating > selectedLanguage.rating) {
+				selectedLanguage = { language, rating }
 			}
 		}
 	}
 
-	return selected_language?.language
+	return selectedLanguage?.language
 }
