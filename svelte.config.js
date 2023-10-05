@@ -2,9 +2,11 @@ import { vitePreprocess } from '@sveltejs/kit/vite'
 import adapter from '@sveltejs/adapter-node'
 
 /** @type {import('@sveltejs/kit').Config} */
-export default {
+const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter()
 	}
 }
+
+export default config
