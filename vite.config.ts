@@ -1,4 +1,4 @@
-import { defineConfig, UserConfigExport } from 'vitest/config'
+import { defineConfig, type UserConfigExport } from 'vitest/config'
 import { sveltekit } from '@sveltejs/kit/vite'
 
 const config: UserConfigExport = defineConfig({
