@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { buildLocalizedUrl, getLocaleFromRequest } from '$lib/utils'
 import { isLocaleAvailable, log, redirect, replaceHtmlFragments } from '$lib/utils'
 import { setupPocketbase } from '$lib/server/'
-import { THEME_COLOR } from '@constants'
+import { THEME_COLOR } from '$constants'
 
 import type { Handle } from '@sveltejs/kit'
 

@@ -6,7 +6,7 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		alias: {
-			'@constants': './src/constants'
+			$constants: './src/constants'
 		},
 		adapter: adapter()
 	}

@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, LOCALES, LOADERS } from '@constants'
+import { DEFAULT_LOCALE, LOCALES, LOADERS } from '$constants'
 import i18n from 'sveltekit-i18n'
 
 import type { Config } from 'sveltekit-i18n'

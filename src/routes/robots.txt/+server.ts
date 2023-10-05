@@ -1,9 +1,9 @@
-import { PUBLIC_ORIGIN } from '$env/static/public'
+import type { RequestHandler } from '@sveltejs/kit'
 
 export const prerender = true
 
-export async function GET(): Promise<Response> {
-	const body = ['User-agent: *', 'Allow: /', '', `Sitemap: ${PUBLIC_ORIGIN}/sitemap.xml`]
+export const GET: RequestHandler = async ({ url }) => {
+	const body = ['User-agent: *', 'Allow: /', '', `Sitemap: ${url.origin}/sitemap.xml`]
 		.join('\n')
 		.trim()
 
