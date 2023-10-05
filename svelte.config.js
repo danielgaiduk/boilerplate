@@ -5,6 +5,9 @@ import adapter from '@sveltejs/adapter-node'
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
+		alias: {
+			'@constants': './src/constants'
+		},
 		adapter: adapter()
 	}
 }

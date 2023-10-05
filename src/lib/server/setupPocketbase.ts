@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase'
-import { AUTH_COOKIE_NAME } from '$lib/constants'
+import { AUTH_COOKIE_NAME } from '@constants'
 import { PRIVATE_POCKETBASE_URL } from '$env/static/private'
 
 import type { Cookies } from '@sveltejs/kit'

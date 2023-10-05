@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, LOCALE_COOKIE_NAME } from '$lib/constants'
+import { DEFAULT_LOCALE, LOCALE_COOKIE_NAME } from '@constants'
 import { getPreferredLocale, isLocaleAvailable } from '$lib/utils'
 
 import type { Cookies } from '@sveltejs/kit'

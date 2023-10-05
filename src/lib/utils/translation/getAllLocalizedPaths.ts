@@ -1,4 +1,4 @@
-import { LOCALES, DEFAULT_LOCALE } from '$lib/constants'
+import { LOCALES, DEFAULT_LOCALE } from '@constants'
 import { extractLocaleFromPathname } from '$lib/utils'
 
 export default function (url: URL): AlternateLinks[] {

@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE } from '$lib/constants'
+import { DEFAULT_LOCALE } from '@constants'
 import { parseAcceptLanguage, isLocaleAvailable } from '$lib/utils'
 
 export default function (request: Request): string {
