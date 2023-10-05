@@ -3,7 +3,8 @@ import containerQueries from '@tailwindcss/container-queries'
 import forms from '@tailwindcss/forms'
 import typography from '@tailwindcss/typography'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import { Config } from 'tailwindcss'
+
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
