@@ -1,14 +1,10 @@
 import dayjs from 'dayjs'
-import { THEME_COLOR } from '$lib/constants'
-import {
-	buildLocalizedUrl,
-	getLocaleFromRequest,
-	isLocaleAvailable,
-	log,
-	redirect,
-	replaceHtmlFragments
-} from '$lib/utils'
+
+import { buildLocalizedUrl, getLocaleFromRequest } from '$lib/utils'
+import { isLocaleAvailable, log, redirect, replaceHtmlFragments } from '$lib/utils'
 import { setupPocketbase } from '$lib/server/'
+import { THEME_COLOR } from '$lib/constants'
+
 import type { Handle } from '@sveltejs/kit'
 
 export const handle = (async ({ event, resolve }) => {
@@ -23,15 +19,17 @@ export const handle = (async ({ event, resolve }) => {
 	}
 
 	if (!id) {
-		const locale = getLocaleFromRequest(cookies, request)
+		const requestLocale = getLocaleFromRequest(cookies, request)
 
-		return redirect(`/${locale}/404`)
+		return redirect(`/${requestLocale}/404`)
 	}
 
 	if (!isLocaleAvailable(locale)) {
 		const location = buildLocalizedUrl(cookies, request, url)
 
-		if (location) return redirect(location)
+		if (location) {
+			return redirect(location)
+		}
 	}
 
 	const pb = await setupPocketbase(cookies)
