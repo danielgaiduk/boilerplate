@@ -2,11 +2,15 @@ import PocketBase from 'pocketbase'
 import { AUTH_COOKIE_NAME } from '$lib/constants'
 import { PRIVATE_POCKETBASE_URL } from '$env/static/private'
 
-export default async function (cookie: Cookie): Promise<PocketBase> {
+import type { Cookies } from '@sveltejs/kit'
+
+export default async function (cookies: Cookies): Promise<PocketBase> {
 	const pb = new PocketBase(PRIVATE_POCKETBASE_URL)
 
-	if (cookie?.[AUTH_COOKIE_NAME]) {
-		await pb.authStore.loadFromCookie(`pb_auth=${cookie?.[AUTH_COOKIE_NAME]}`)
+	const cookie = cookies.get(AUTH_COOKIE_NAME)
+
+	if (cookie) {
+		await pb.authStore.loadFromCookie(`pb_auth=${cookie}`)
 
 		try {
 			if (pb.authStore.isValid) {

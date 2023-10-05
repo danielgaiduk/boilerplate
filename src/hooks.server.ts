@@ -1,11 +1,10 @@
+import dayjs from 'dayjs'
 import { THEME_COLOR } from '$lib/constants'
 import {
-	buildCookie,
 	buildLocalizedUrl,
 	getLocaleFromRequest,
 	isLocaleAvailable,
 	log,
-	parseCookie,
 	redirect,
 	replaceHtmlFragments
 } from '$lib/utils'
@@ -15,7 +14,7 @@ import type { Handle } from '@sveltejs/kit'
 export const handle = (async ({ event, resolve }) => {
 	log('SERVER HOOK CALLED')
 
-	const { params, request, route, url } = event
+	const { params, request, route, url, cookies } = event
 	const { locale = '' } = params
 	const { id } = route
 
@@ -23,21 +22,19 @@ export const handle = (async ({ event, resolve }) => {
 		return resolve(event)
 	}
 
-	const cookie = parseCookie(request)
-
 	if (!id) {
-		const locale = getLocaleFromRequest(cookie, request)
+		const locale = getLocaleFromRequest(cookies, request)
 
 		return redirect(`/${locale}/404`)
 	}
 
 	if (!isLocaleAvailable(locale)) {
-		const location = buildLocalizedUrl(cookie, request, url)
+		const location = buildLocalizedUrl(cookies, request, url)
 
 		if (location) return redirect(location)
 	}
 
-	const pb = await setupPocketbase(cookie)
+	const pb = await setupPocketbase(cookies)
 
 	if (pb.authStore.isValid) {
 		if (id?.includes('(unguarded)')) {
@@ -55,15 +52,16 @@ export const handle = (async ({ event, resolve }) => {
 		user: structuredClone(pb.authStore.model)
 	}
 
-	const response = await resolve(
+	cookies.set('locale', locale, {
+		path: '/',
+		expires: dayjs().add(1, 'year').toDate()
+	})
+
+	return resolve(
 		event,
 		replaceHtmlFragments({
 			'%lang%': locale,
 			'%theme-color%': THEME_COLOR
 		})
 	)
-
-	response.headers.append('set-cookie', buildCookie('locale', locale))
-
-	return response
 }) satisfies Handle

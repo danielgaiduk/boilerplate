@@ -16,7 +16,6 @@ declare global {
 		// interface Platform {}
 	}
 	type AlternateLinks = { href: string; hreflang: string }
-	type Cookie = Record<string, string>
 	type SelectedLanguage = { language: string; rating: number }
 	type Temporal = [number, 'day' | 'month' | 'year']
 }
