@@ -3,9 +3,9 @@ import containerQueries from '@tailwindcss/container-queries'
 import forms from '@tailwindcss/forms'
 import typography from '@tailwindcss/typography'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import { Config } from 'tailwindcss'
 
-/** @type {import('tailwindcss').Config} */
-export default {
+const config: Config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
@@ -16,3 +16,5 @@ export default {
 	},
 	plugins: [aspectRatio, containerQueries, forms, typography]
 }
+
+export default config
