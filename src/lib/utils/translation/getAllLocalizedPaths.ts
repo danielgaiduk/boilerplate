@@ -1,7 +1,7 @@
 import { LOCALES, DEFAULT_LOCALE } from '@constants'
 import { extractLocaleFromPathname } from '$lib/utils'
 
-export default function (url: URL): AlternateLinks[] {
+export default function (url: URL): { href: string; hreflang: string }[] {
 	const { origin, pathname, search } = url
 
 	const path = extractLocaleFromPathname(pathname)

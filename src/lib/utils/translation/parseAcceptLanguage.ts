@@ -1,5 +1,5 @@
 export default function (headerLanguages: string): string {
-	let selectedLanguage: SelectedLanguage = { language: '', rating: 0 }
+	let selectedLanguage: { language: string; rating: number } = { language: '', rating: 0 }
 
 	for (const headerLanguage of headerLanguages?.split(',') || []) {
 		const [fullLanguage, sourceRating = '1'] = headerLanguage.split(';q=')
