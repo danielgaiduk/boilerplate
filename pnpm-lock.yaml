@@ -64,7 +64,7 @@ devDependencies:
     version: 3.0.3(prettier@3.0.3)(svelte@4.2.1)
   super-sitemap:
     specifier: ^0.13.8
-    version: 0.13.8(svelte@4.2.1)
+    version: 0.13.9(svelte@4.2.1)
   svelte:
     specifier: ^4.2.1
     version: 4.2.1
@@ -419,7 +419,7 @@ packages:
       ajv: 6.12.6
       debug: 4.3.4
       espree: 9.6.1
-      globals: 13.22.0
+      globals: 13.23.0
       ignore: 5.2.4
       import-fresh: 3.3.0
       js-yaml: 4.1.0
@@ -1755,7 +1755,7 @@ packages:
       file-entry-cache: 6.0.1
       find-up: 5.0.0
       glob-parent: 6.0.2
-      globals: 13.22.0
+      globals: 13.23.0
       graphemer: 1.4.0
       ignore: 5.2.4
       imurmurhash: 0.1.4
@@ -2054,10 +2054,10 @@ packages:
       once: 1.4.0
     dev: true
 
-  /globals@13.22.0:
+  /globals@13.23.0:
     resolution:
       {
-        integrity: sha512-H1Ddc/PbZHTDVJSnj8kWptIRSD6AM3pK+mKytuIVF4uoBV7rshFlhhvA58ceJ5wp3Er58w6zj7bykMpYXt3ETw==
+        integrity: sha512-XAmF0RjlrjY23MA51q3HltdlGxUpXPvg0GioKiD9X6HD28iMjo2dKC8Vqwm7lne4GNr78+RHTfliktR6ZH09wA==
       }
     engines: { node: '>=8' }
     dependencies:
@@ -3308,10 +3308,10 @@ packages:
       ts-interface-checker: 0.1.13
     dev: true
 
-  /super-sitemap@0.13.8(svelte@4.2.1):
+  /super-sitemap@0.13.9(svelte@4.2.1):
     resolution:
       {
-        integrity: sha512-80bOAND6CYoTjMcz7ftQ3sG1fBjpS4AVHsgYjjq5E47MldxJbb1Tx8a+WAbGQBZDddHDukTksIIPHO6Wl+gglg==
+        integrity: sha512-srEM2lVO6pmhRmuPOH0dBn+c6Yqgrz2Eqq5dCbWz6o7HMRHApm5WD3917x+hYCdO2ZjDJOpFRMCDue4zu5uX9Q==
       }
     peerDependencies:
       svelte: ^4.0.0
