@@ -1,7 +1,4 @@
 import { THEME_COLOR } from '$lib/constants'
-import { PUBLIC_SENTRY_DSN } from '$env/static/public'
-import { sequence } from '@sveltejs/kit/hooks'
-import * as Sentry from '@sentry/sveltekit'
 import {
 	buildCookie,
 	buildLocalizedUrl,
@@ -15,12 +12,7 @@ import {
 import { setupPocketbase } from '$lib/server/'
 import type { Handle } from '@sveltejs/kit'
 
-Sentry.init({
-	dsn: PUBLIC_SENTRY_DSN,
-	tracesSampleRate: 1
-})
-
-export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }) => {
+export const handle = (async ({ event, resolve }) => {
 	log('SERVER HOOK CALLED')
 
 	const { params, request, route, url } = event
@@ -74,6 +66,4 @@ export const handle = sequence(Sentry.sentryHandle(), (async ({ event, resolve }
 	response.headers.append('set-cookie', buildCookie('locale', locale))
 
 	return response
-}) satisfies Handle)
-
-export const handleError = Sentry.handleErrorWithSentry()
+}) satisfies Handle
